@@ -1,0 +1,37 @@
+.data_line_page1 {
+    border: 1px solid rgb(216, 214, 214);
+    height: 30px;
+    margin-bottom: 10px;
+    background-color: aliceblue;
+}
+
+.data_line_page1>div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+
+ol {
+    font-weight: bold;
+}
+
+.Page_2>table {
+    border: 1px solid red;
+    width: 100%;
+    /* border-collapse: separate; */
+    border-spacing: 0 10px;
+}
+
+.Page_2 table th {
+    background-color: rgb(108, 174, 231);
+    height: 40px;
+    border: 1px solid rgb(189, 187, 187);
+
+}
+
+.Page_2 table td {
+    background-color: aliceblue;
+    border: 1px solid rgb(199, 196, 196);
+    height: 30px;
+}
