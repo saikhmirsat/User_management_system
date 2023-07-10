@@ -11,7 +11,7 @@ export default function Page1() {
 
     const { setIsUpdate } = useContext(ValueContext)
 
-
+    const navigate = useNavigate()
 
 
     const getData = async () => {
@@ -20,7 +20,6 @@ export default function Page1() {
                 .then((res) => res.json())
                 .then((res) => {
                     setUserData(res)
-
                     // console.log(res)
                 })
                 .catch((e) => console.log(e))
@@ -33,7 +32,7 @@ export default function Page1() {
         getData()
     }, [])
 
-    const navigate = useNavigate()
+
 
     const GotoPage3Func = (ele) => {
         localStorage.setItem('id', ele._id)
@@ -60,8 +59,11 @@ export default function Page1() {
                 method: 'DELETE'
             }).then((res) => res.json())
                 .then((res) => {
-                    setUserData(res)
+                    alert(res.msg)
                     console.log(res)
+                    setUserData((prevUserData) =>
+                        prevUserData.filter((user) => user._id !== id)
+                    );
                 })
 
         } catch (error) {
@@ -71,36 +73,40 @@ export default function Page1() {
 
 
     return (
-        <div className='Page_2'>
-            <h1>page1</h1>
+        <div className='Page_1'>
 
-            <button onClick={AddUserBTNFUNC}>Add User</button>
+            <button className='addUserBTN' onClick={AddUserBTNFUNC}>Add User</button>
 
-            <table >
-                <tr >
-                    <th>ID</th>
-                    <th>NAME</th>
-                    <th>View User Detail</th>
-                    <th>Update User Detail</th>
-                    <th>Delete User</th>
-                </tr>
-                {
-                    userData && userData.map((ele) => <tr key={ele._id}>
-                        <td>{ele._id}</td>
-                        <td>{ele.name}</td>
-                        <td>
-                            <button onClick={() => GotoPage3Func(ele)}>View</button>
-                        </td>
-                        <td>
-                            <button onClick={() => GotoPage2Func(ele)}>Edit</button>
-                        </td>
-                        <td>
-                            <button onClick={() => Deletefunc(ele._id)}>Delete</button>
-                        </td>
-                    </tr>)
-                }
+            <table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>View User Detail</th>
+      <th>Update User Detail</th>
+      <th>Delete User</th>
+    </tr>
+  </thead>
+  <tbody>
+    {userData &&
+      userData.map((ele) => (
+        <tr key={ele._id}>
+          <td>{ele._id}</td>
+          <td>{ele.name}</td>
+          <td>
+            <button onClick={() => GotoPage3Func(ele)}>View</button>
+          </td>
+          <td>
+            <button onClick={() => GotoPage2Func(ele)}>Edit</button>
+          </td>
+          <td>
+            <button onClick={() => Deletefunc(ele._id)}>Delete</button>
+          </td>
+        </tr>
+      ))}
+  </tbody>
+</table>
 
-            </table>
         </div>
     )
 }

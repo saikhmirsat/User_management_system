@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 
 export default function Page3() {
@@ -29,28 +30,29 @@ export default function Page3() {
     useEffect(() => {
         getData()
     }, [])
-
+    const navigate = useNavigate()
 
 
     return (
-        <div className='Page_2'>
-            <table >
-                <tr >
-                    <th>ID</th>
-                    <th>NAME</th>
-                    <th>Email</th>
-                    <th>PHONE</th>
-                </tr>
-                {
-                    // user && user.map((ele) => <tr key={ele._id}>
-                    //     <td>{ele._id}</td>
-                    //     <td>{ele.name}</td>
-                    //     <td>{ele.email}</td>
-                    //     <td>{ele.phone}</td>
-                    // </tr>)
-                }
-
+        <div className='Page_1'>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>Email</th>
+                        <th>PHONE</th>
+                    </tr>
+                    <tr>
+                        <td>{user._id}</td>
+                        <td>{user.name}</td>
+                        <td>{user.email}</td>
+                        <td>{user.phone}</td>
+                    </tr>
+                </tbody>
             </table>
+
+            <button className='page3_gobak' onClick={() => navigate('/')}>Go Back to Page 1</button>
         </div>
     )
 }

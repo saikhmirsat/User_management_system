@@ -13,7 +13,7 @@ export default function Page2() {
 
     const navigate = useNavigate()
 
-    const { isUpdate } = useContext(ValueContext)
+    const { isUpdate, setIsUpdate } = useContext(ValueContext)
 
     const updateID = localStorage.getItem('id')
 
@@ -35,7 +35,10 @@ export default function Page2() {
                 alert(res.msg)
                 navigate('/')
             })
-            .catch((e) => console.log(e))
+            .catch((e) => {
+                alert(e)
+                console.log(e)
+            })
 
 
     }
@@ -66,15 +69,20 @@ export default function Page2() {
 
     return (
         <div>
-            <h1>{isUpdate ? 'Update User' : 'Create User'}</h1>
+            <div className='Page_2'>
+                <div>
+                    <button onClick={() => setIsUpdate(false)} className={!isUpdate ? "Btn_background_change_false" : ""}>Create User</button><button onClick={() => setIsUpdate(true)} className={isUpdate ? "Btn_background_change_true" : ""}>Update User</button>
+                </div>
+                <h4>{isUpdate ? 'Update User' : 'Create User'}</h4>
 
-            <input type="text" placeholder='Name' onChange={(e) => setName(e.target.value)} />
-            <input type="text" placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
-            <input type="text" placeholder='Phone' onChange={(e) => setPhone(e.target.value)} />
+                <input type="text" placeholder='Name' onChange={(e) => setName(e.target.value)} />
+                <input type="text" placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
+                <input type="text" placeholder='Phone' onChange={(e) => setPhone(e.target.value)} />
 
-            <button onClick={isUpdate ? UpdateFunc : AddUser}>{isUpdate ? 'Update User' : 'Create User'}</button>
+                <button className='page2_submit_btn' onClick={isUpdate ? UpdateFunc : AddUser}>{isUpdate ? 'Update User' : 'Create User'}</button>
 
-            <button onClick={() => navigate('/')}>goBack</button>
+            </div>
+            <span>Click here to</span> <button className='Page2_goBack' onClick={() => navigate('/')}>goBack</button>
         </div>
     )
 }
